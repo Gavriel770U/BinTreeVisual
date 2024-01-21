@@ -34,12 +34,12 @@ public class BTPanel <T> extends JPanel
     {
         super.paintComponent(graphics);
 
-        if(!this.enabled)
+        if (!this.enabled)
         {
             return;
         }
 
-        if(null == this.root)
+        if (null == this.root)
         {
             repaint();
             return;
@@ -67,7 +67,7 @@ public class BTPanel <T> extends JPanel
 
                 if (this.root != null)
                 {
-                    System.out.println(this.valueGetter.apply(this.root) + " ");
+                    // System.out.println(this.valueGetter.apply(this.root) + " ");
 
                     graphics.setColor(Color.WHITE);
                     graphics.fillOval(x, y, BTSettings.RADIUS.value, BTSettings.RADIUS.value);
@@ -82,7 +82,7 @@ public class BTPanel <T> extends JPanel
                         queue.insert(null);
                     }
 
-                    if(rightGetter.apply(this.root) != null)
+                    if (rightGetter.apply(this.root) != null)
                     {
                         queue.insert((T) this.rightGetter.apply(this.root));
                     }
@@ -95,7 +95,7 @@ public class BTPanel <T> extends JPanel
                 x += 1.5 * BTSettings.RADIUS.value;
             }
 
-            System.out.println("");
+            // System.out.println("");
             y += 2 * BTSettings.RADIUS.value;
             level++;
         }
