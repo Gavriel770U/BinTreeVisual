@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 // Singleton class for calling functions to display binary trees
 
-public class BTVisualizer<T, F>
+public class BTVisualizer <T>
 {
     private static BTVisualizer instance = null;
 
