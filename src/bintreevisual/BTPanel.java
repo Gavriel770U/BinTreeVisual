@@ -44,17 +44,22 @@ public class BTPanel <T> extends JPanel
             repaint();
             return;
         }
-
-        graphics.setColor(Color.WHITE);
-        graphics.fillOval(100, 100, 50, 50);
+            
+        // Breadth First Traversal
 
         GQueue<T> queue = new GQueue<>();
-        int count = 0, i = 0;
+        int count = 0, i = 0, level = 0;
+        int x0 = (BTSettings.FRAME_WIDTH.value - BTSettings.RADIUS.value) / 2;
+        int y0 = BTSettings.RADIUS.value;
+        int x = x0;
+        int y = y0;
         queue.insert(this.root);
 
         while (!queue.isEmpty())
         {
             count = queue.getCount();
+
+            x = x0 - (int)(BTSettings.RADIUS.value * Math.pow(2.0, (double)level));
 
             for (i = 0; i < count; i++)
             {
@@ -63,6 +68,9 @@ public class BTPanel <T> extends JPanel
                 if (this.root != null)
                 {
                     System.out.println(this.valueGetter.apply(this.root) + " ");
+
+                    graphics.setColor(Color.WHITE);
+                    graphics.fillOval(x, y, BTSettings.RADIUS.value, BTSettings.RADIUS.value);
 
                     if (this.leftGetter.apply(this.root) != null)
                     {
@@ -74,9 +82,13 @@ public class BTPanel <T> extends JPanel
                         queue.insert((T) this.rightGetter.apply(this.root));
                     }
                 }
+
+                x += 2 * BTSettings.RADIUS.value;
             }
 
             System.out.println("");
+            y += 2 * BTSettings.RADIUS.value;
+            level++;
         }
 
         this.enabled = false;
