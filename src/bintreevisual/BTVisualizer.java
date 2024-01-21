@@ -25,6 +25,6 @@ public class BTVisualizer<T, F>
 
     public <T> void visualize(T root, Supplier<T> getter)
     {
-        
+        new BTFrame(root, getter);
     }
 }

@@ -54,11 +54,11 @@ public class GQueue <T>
         {
             if (pos.hasNext())
             {
-                str += pos.getValue()+",";
+                str += pos.getValue() + ",";
             }
             pos = pos.getNext();
         }
 
-        return str+"]";
+        return str + "]";
     }
 }

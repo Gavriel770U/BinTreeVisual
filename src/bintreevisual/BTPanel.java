@@ -3,12 +3,16 @@ package bintreevisual;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.function.Supplier;
 
 import javax.swing.JPanel;
 
-public class BTPanel extends JPanel 
+public class BTPanel <T> extends JPanel 
 {
-    public BTPanel()
+    private T root;
+    private Supplier<T> getter;
+
+    public BTPanel(T root, Supplier<T> getter)
     {
         setPreferredSize(new Dimension(BTSettings.FRAME_WIDTH.value, BTSettings.FRAME_HEIGHT.value));
         setDoubleBuffered(true);
