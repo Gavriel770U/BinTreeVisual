@@ -7,6 +7,6 @@ class Main
         System.out.println("Welcome to Bin Tree Visualisation!");
         
         BTVisualizer vis = BTVisualizer.getInstance();
-        vis.visualize(null, null);
+        vis.visualize(null, null, null, null);
     }
 }

@@ -23,8 +23,13 @@ public class BTVisualizer<T, F>
         return instance;
     }
 
-    public <T> void visualize(T root, Supplier<T> getter)
+    public <T> void visualize(T root, Supplier<T> valueGetter, Supplier<T> leftGetter, Supplier<T> rightGetter)
     {
-        new BTFrame(root, getter);
+        new BTFrame(root, valueGetter, leftGetter, rightGetter);
     }
+
+    // public <T> void visualize(T root, Supplier<T> valueGetter)
+    // {
+    //     new BTFrame(root, valueGetter);
+    // }
 }
