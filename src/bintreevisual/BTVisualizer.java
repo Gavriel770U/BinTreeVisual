@@ -1,6 +1,6 @@
 package bintreevisual;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 // Singleton class for calling functions to display binary trees
 
@@ -17,15 +17,15 @@ public class BTVisualizer <T>
     {
         if (null == instance)
         {
-            instance = new BTVisualizer();
+            instance = new BTVisualizer<>();
         }
 
         return instance;
     }
 
-    public <T> void visualize(T root, Supplier<T> valueGetter, Supplier<T> leftGetter, Supplier<T> rightGetter)
+    public void visualize(T root, Function<T, ?> valueGetter, Function<T, ?> leftGetter, Function<T, ?>  rightGetter)
     {
-        new BTFrame(root, valueGetter, leftGetter, rightGetter);
+        new BTFrame<T>(root, valueGetter, leftGetter, rightGetter);
     }
 
     // public <T> void visualize(T root, Supplier<T> valueGetter)

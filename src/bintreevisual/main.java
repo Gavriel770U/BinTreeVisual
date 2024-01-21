@@ -6,7 +6,12 @@ class Main
     {
         System.out.println("Welcome to Bin Tree Visualisation!");
         
-        BTVisualizer vis = BTVisualizer.getInstance();
-        vis.visualize(null, null, null, null);
+        BTVisualizer<BinNode> vis = BTVisualizer.getInstance();
+
+        BinNode<Integer> root = new BinNode<>(1);
+        root.setLeft(new BinNode<>(2));
+        root.setRight(new BinNode<>(3));
+
+        vis.visualize(root, BinNode::getValue, BinNode::getLeft, BinNode::getRight);
     }
 }
