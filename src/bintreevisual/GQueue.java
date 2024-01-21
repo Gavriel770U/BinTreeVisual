@@ -44,6 +44,7 @@ public class GQueue <T>
         return value;
     }
 
+    @Override
     public String toString()
     {
         GNode<T> pos = this.first;
