@@ -6,9 +6,6 @@ class Main
     {
         System.out.println("Welcome to Bin Tree Visualisation!");
 
-        for(;;)
-        {
-            
-        }
+        new BTFrame();
     }
 }
