@@ -9,8 +9,15 @@ class Main
         BTVisualizer<BinNode> vis = BTVisualizer.getInstance();
 
         BinNode<Integer> root = new BinNode<>(1);
-        root.setLeft(new BinNode<>(2));
-        root.setRight(new BinNode<>(3));
+        BinNode<Integer> left = new BinNode<>(2);
+        BinNode<Integer> right = new BinNode<>(3);
+        BinNode<Integer> leftleft = new BinNode<>(4);
+        BinNode<Integer> rightleft = new BinNode<Integer>(6);
+
+        root.setLeft(left);
+        root.setRight(right);
+        left.setLeft(leftleft);
+        right.setLeft(rightleft);
 
         vis.visualize(root, BinNode::getValue, BinNode::getLeft, BinNode::getRight);
     }

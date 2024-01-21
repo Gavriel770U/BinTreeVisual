@@ -71,6 +71,7 @@ public class BTPanel <T> extends JPanel
 
                     graphics.setColor(Color.WHITE);
                     graphics.fillOval(x, y, BTSettings.RADIUS.value, BTSettings.RADIUS.value);
+                    graphics.drawString(this.valueGetter.apply(this.root).toString(), x, y);
 
                     if (this.leftGetter.apply(this.root) != null)
                     {
