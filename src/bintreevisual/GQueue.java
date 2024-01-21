@@ -9,13 +9,13 @@ public class GQueue <T>
 
     public GQueue()
     {
-        first = null;
-        last = null;
+        this.first = null;
+        this.last = null;
     }
 
     public boolean isEmpty()
     {
-        return (null == first);
+        return (null == this.first);
     }
 
     public void insert(T value)
@@ -33,18 +33,31 @@ public class GQueue <T>
                 pos = pos.getNext();
             }
             pos.setNext(new GNode<T>(value));
-            last = pos.getNext();
+            this.last = pos.getNext();
         }
     }
 
     public T remove()
     {
-        return null;
+        T value = this.first.getValue();
+        this.first = this.first.getNext();
+        return value;
     }
 
-    @Override
     public String toString()
     {
-        return "Queue";
+        GNode<T> pos = this.first;
+        String str = "[";
+
+        while (pos != null)
+        {
+            if (pos.hasNext())
+            {
+                str += pos.getValue()+",";
+            }
+            pos = pos.getNext();
+        }
+
+        return str+"]";
     }
 }
