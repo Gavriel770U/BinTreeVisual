@@ -13,6 +13,12 @@ public class GNode <T>
         this.next = null;
     }
 
+    public GNode(T value, GNode<T> next)
+    {
+        this.value = value;
+        this.next = next;
+    }
+
     public T getValue()
     {
         return this.value;
@@ -41,6 +47,6 @@ public class GNode <T>
     @Override
     public String toString()
     {
-        return "GNode";
+      return this.value + " --> " + this.next;
     }
 }
