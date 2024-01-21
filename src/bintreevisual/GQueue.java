@@ -6,11 +6,13 @@ public class GQueue <T>
 {
     private GNode<T> first;
     private GNode<T> last;
+    private int count;
 
     public GQueue()
     {
         this.first = null;
         this.last = null;
+        this.count = 0;
     }
 
     public boolean isEmpty()
@@ -18,30 +20,45 @@ public class GQueue <T>
         return (null == this.first);
     }
 
+    public T head()
+    {
+        return this.first.getValue(); 
+    }
+
     public void insert(T value)
     {
-        if(this.isEmpty())
+        GNode<T> temp = new GNode<T>(value); 
+
+        if (this.isEmpty())
         {
-            this.first = new GNode<T>(value);
+            this.first = temp; 
         }
         else
         {
-            GNode<T> pos = first;
-
-            while(pos.hasNext())
-            {
-                pos = pos.getNext();
-            }
-            pos.setNext(new GNode<T>(value));
-            this.last = pos.getNext();
+            this.last.setNext(temp); 
         }
+        this.last = temp; 
+
+        this.count++;
     }
 
     public T remove()
     {
-        T value = this.first.getValue();
-        this.first = this.first.getNext();
+        T value = this.first.getValue(); 
+        this.first = this.first.getNext(); 
+
+        if (this.isEmpty())
+        {
+          this.last = null; 
+        }
+
+        this.count--;
         return value;
+    }
+
+    public int getCount()
+    {
+        return this.count;
     }
 
     @Override

@@ -26,6 +26,10 @@ public class BTPanel <T> extends JPanel
     {
         super.paintComponent(graphics);
 
+        graphics.setColor(Color.WHITE);
+        graphics.drawOval(100, 100, 10, 10);
+
+
         repaint();
     }
 }
