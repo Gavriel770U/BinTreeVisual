@@ -4,8 +4,8 @@ package bintreevisual;
 
 public class GNode <T>
 {
-    T value;
-    GNode<T> next;
+    private T value;
+    private GNode<T> next;
 
     public GNode(T value)
     {
