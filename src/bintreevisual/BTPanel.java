@@ -59,7 +59,7 @@ public class BTPanel <T> extends JPanel
         {
             count = queue.getCount();
 
-            x = x0 - (int)(BTSettings.RADIUS.value * Math.pow(2.0, (double)level));
+            x = x0 - (int)(BTSettings.RADIUS.value * Math.pow(2.0, (double)level) * 0.5);
 
             for (i = 0; i < count; i++)
             {
@@ -77,14 +77,22 @@ public class BTPanel <T> extends JPanel
                     {
                         queue.insert((T) this.leftGetter.apply(this.root));
                     }
+                    else
+                    {
+                        queue.insert(null);
+                    }
 
                     if(rightGetter.apply(this.root) != null)
                     {
                         queue.insert((T) this.rightGetter.apply(this.root));
                     }
+                    else
+                    {
+                        queue.insert(null);
+                    }
                 }
 
-                x += 2 * BTSettings.RADIUS.value;
+                x += 1.5 * BTSettings.RADIUS.value;
             }
 
             System.out.println("");
