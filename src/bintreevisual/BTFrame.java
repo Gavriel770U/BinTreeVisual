@@ -12,6 +12,7 @@ public class BTFrame extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBackground(getForeground());
         setTitle("Binary Tree Visualisation");
+        add(new BTPanel());
         pack();
         setVisible(true);
     }

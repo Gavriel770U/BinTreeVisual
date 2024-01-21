@@ -9,8 +9,18 @@ public class BTPanel extends JPanel
 {
     public BTPanel()
     {
+        setPreferredSize(new Dimension(BTSettings.FRAME_WIDTH.value, BTSettings.FRAME_HEIGHT.value));
         setDoubleBuffered(true);
         setBackground(Color.BLACK);
-        setPreferredSize(new Dimension(BTSettings.FRAME_WIDTH.value, BTSettings.FRAME_HEIGHT.value));
+        requestFocusInWindow();
+        setFocusable(true);
+    }
+
+    @Override
+    public void paintComponent(Graphics graphics)
+    {
+        super.paintComponent(graphics);
+
+        repaint();
     }
 }
