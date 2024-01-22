@@ -29,6 +29,23 @@ public class BTPanel <T> extends JPanel
         this.rightGetter = rightGetter;
     }
 
+    // TODO: fix this function
+    private int treeHeight(T root)
+    {
+        if (null == root)
+        {
+            return -1;
+        }
+
+        int leftHeight = 0, rightHeight = 0;
+        
+        leftHeight = treeHeight((T) this.leftGetter.apply(root));
+         
+        rightHeight = treeHeight((T) this.rightGetter.apply(root));
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
     @Override
     public void paintComponent(Graphics graphics)
     {

@@ -20,9 +20,9 @@ class Main
         root.setLeft(left);
         root.setRight(right);
         left.setLeft(leftleft);
-        // left.setRight(leftright);
+        left.setRight(leftright);
         right.setLeft(rightleft);
-        // right.setRight(rightright);
+        right.setRight(rightright);
 
         vis.visualize(root, BinNode::getValue, BinNode::getLeft, BinNode::getRight);
     }
