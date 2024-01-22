@@ -66,21 +66,27 @@ public class BTPanel <T> extends JPanel
 
         GQueue<T> queue = new GQueue<>();
         int count = 0, i = 0, level = 0;
+        int height = treeHeight(this.root);
         int x0 = (BTSettings.FRAME_WIDTH.value - BTSettings.RADIUS.value) / 2;
         int y0 = BTSettings.RADIUS.value;
         int x = x0;
         int y = y0;
+        int elemi = 0;
         queue.insert(this.root);
 
         while (!queue.isEmpty())
         {
             count = queue.getCount();
 
-            x = x0 - (int)(BTSettings.RADIUS.value * Math.pow(2.0, (double)level) * 0.5);
-
             for (i = 0; i < count; i++)
             {
                 this.root = queue.remove();
+                
+                elemi++;
+                if(elemi == Math.pow(2, level))
+                {
+                    elemi = 0;
+                }
 
                 if (this.root != null)
                 {
@@ -108,8 +114,14 @@ public class BTPanel <T> extends JPanel
                         queue.insert(null);
                     }
                 }
-
-                x += 1.5 * BTSettings.RADIUS.value;
+                if (0 <= elemi && elemi >= Math.pow(2.0, level) / 2)
+                {
+                    x = x0 - (int)(1.5 * BTSettings.RADIUS.value * Math.pow(2.0, height-level) * elemi);
+                }
+                else
+                {
+                    x = x0 + (int)(1.5 * BTSettings.RADIUS.value * Math.pow(2.0, height-level) * (Math.pow(2.0, level) / 2 - elemi));
+                }
             }
 
             // System.out.println("");

@@ -15,6 +15,7 @@ class Main
         BinNode<Integer> leftright = new BinNode<>(5);
         BinNode<Integer> rightleft = new BinNode<Integer>(6);
         BinNode<Integer> rightright = new BinNode<Integer>(7);
+        BinNode<Integer> nn = new BinNode<Integer>(770);
 
 
         root.setLeft(left);
@@ -23,6 +24,7 @@ class Main
         left.setRight(leftright);
         right.setLeft(rightleft);
         right.setRight(rightright);
+        rightleft.setLeft(nn);
 
         vis.visualize(root, BinNode::getValue, BinNode::getLeft, BinNode::getRight);
     }
