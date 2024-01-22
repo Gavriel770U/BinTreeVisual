@@ -1,6 +1,7 @@
 # BinTreeVisual
 GUI visualisation of Bin Tree
 
+![GUI Preview](assets/preview.png)
 ______________________________________________
 
 # About
