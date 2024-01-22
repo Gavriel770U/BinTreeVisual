@@ -10,5 +10,3 @@ cd ../%BUILD_DIR%
 jar cfm BinTreeVisual.jar ./MANIFEST.MF -C bintreevisual/ .
 
 echo Build completed successfully.
-
-pause
