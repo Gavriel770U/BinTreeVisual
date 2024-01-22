@@ -3,6 +3,8 @@ package bintreevisual;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.util.HashMap;
 import java.util.function.Function;
 
 import javax.swing.JPanel;
@@ -13,7 +15,7 @@ public class BTPanel <T> extends JPanel
     private Function<T, ?> valueGetter;
     private Function<T, ?> leftGetter;
     private Function<T, ?> rightGetter;
-    private boolean enabled = true;
+    private HashMap<T, Point> nodePositions;
 
     public BTPanel(T root, Function<T, ?> valueGetter, Function<T, ?> leftGetter, Function<T, ?> rightGetter)
     {
@@ -23,13 +25,61 @@ public class BTPanel <T> extends JPanel
         requestFocusInWindow();
         setFocusable(true);
 
+        this.nodePositions = new HashMap<>();
+
         this.root = root;
         this.valueGetter = valueGetter;
         this.leftGetter = leftGetter;
         this.rightGetter = rightGetter;
+
+        this.calculateNodePositions(this.root, BTSettings.FRAME_WIDTH.value / 2, 50, BTSettings.RADIUS.value * (this.treeHeight(this.root) + 1));
     }
 
-    // TODO: fix this function
+    private void calculateNodePositions(T root, int x, int y, int xOffset)
+    {
+        if (null == root)
+        {
+            return;
+        }
+
+        this.nodePositions.put(root, new Point(x, y));
+
+        this.calculateNodePositions((T)this.leftGetter.apply(root), x - xOffset, y + 50, xOffset / 2);
+
+        this.calculateNodePositions((T)this.rightGetter.apply(root), x + xOffset, y + 50, xOffset / 2);
+    }
+
+    private void drawTree(Graphics graphics, T root, int x, int y, int xOffset)
+    {
+        if (null == root)
+        {
+            return;
+        }
+
+        Point point = this.nodePositions.get(root);
+
+        graphics.setColor(Color.WHITE);
+        graphics.fillOval(point.x - (BTSettings.RADIUS.value / 2), point.y - (BTSettings.RADIUS.value / 2), BTSettings.RADIUS.value, BTSettings.RADIUS.value);
+        graphics.setColor(Color.GREEN);
+        graphics.drawString(this.valueGetter.apply(root).toString(), point.x - 5, point.y + 5);
+
+        if (this.leftGetter.apply(root) != null)
+        {
+            Point leftPoint = nodePositions.get(this.leftGetter.apply(root));
+            graphics.setColor(Color.WHITE);
+            graphics.drawLine(point.x, point.y, leftPoint.x, leftPoint.y);
+            drawTree(graphics, (T)this.leftGetter.apply(root), leftPoint.x, leftPoint.y, xOffset / 2);
+        }
+
+        if (this.rightGetter.apply(root) != null)
+        {
+            Point rightPoint = nodePositions.get(this.rightGetter.apply(root));
+            graphics.setColor(Color.WHITE);
+            graphics.drawLine(point.x, point.y, rightPoint.x, rightPoint.y);
+            drawTree(graphics, (T)this.rightGetter.apply(root), rightPoint.x, rightPoint.y, xOffset / 2);
+        }
+    }
+
     private int treeHeight(T root)
     {
         if (null == root)
@@ -51,86 +101,8 @@ public class BTPanel <T> extends JPanel
     {
         super.paintComponent(graphics);
 
-        if (!this.enabled)
-        {
-            return;
-        }
+        this.drawTree(graphics, this.root, BTSettings.FRAME_WIDTH.value / 2, 50, BTSettings.RADIUS.value * (this.treeHeight(this.root) + 1));
 
-        if (null == this.root)
-        {
-            repaint();
-            return;
-        }
-            
-        // Breadth First Traversal
-
-        GQueue<T> queue = new GQueue<>();
-        int count = 0, i = 0, level = 0;
-        int height = treeHeight(this.root);
-        int x0 = (BTSettings.FRAME_WIDTH.value - BTSettings.RADIUS.value) / 2;
-        int y0 = BTSettings.RADIUS.value;
-        int x = x0;
-        int y = y0;
-        int elemi = 0;
-        queue.insert(this.root);
-
-        while (!queue.isEmpty())
-        {
-            count = queue.getCount();
-
-            for (i = 0; i < count; i++)
-            {
-                this.root = queue.remove();
-                
-                elemi++;
-                if(elemi == Math.pow(2, level))
-                {
-                    elemi = 0;
-                }
-
-                if (this.root != null)
-                {
-                    // System.out.println(this.valueGetter.apply(this.root) + " ");
-
-                    graphics.setColor(Color.WHITE);
-                    graphics.fillOval(x, y, BTSettings.RADIUS.value, BTSettings.RADIUS.value);
-                    graphics.drawString(this.valueGetter.apply(this.root).toString(), x, y);
-
-                    if (this.leftGetter.apply(this.root) != null)
-                    {
-                        queue.insert((T) this.leftGetter.apply(this.root));
-                    }
-                    else
-                    {
-                        queue.insert(null);
-                    }
-
-                    if (rightGetter.apply(this.root) != null)
-                    {
-                        queue.insert((T) this.rightGetter.apply(this.root));
-                    }
-                    else
-                    {
-                        queue.insert(null);
-                    }
-                }
-                if (0 <= elemi && elemi >= Math.pow(2.0, level) / 2)
-                {
-                    x = x0 - (int)(1.5 * BTSettings.RADIUS.value * Math.pow(2.0, height-level) * elemi);
-                }
-                else
-                {
-                    x = x0 + (int)(1.5 * BTSettings.RADIUS.value * Math.pow(2.0, height-level) * (Math.pow(2.0, level) / 2 - elemi));
-                }
-            }
-
-            // System.out.println("");
-            y += 2 * BTSettings.RADIUS.value;
-            level++;
-        }
-
-        this.enabled = false;
-
-        // repaint(); // if I will improve this in the future repaint will be needed for dynamic changes.
+        repaint();
     }
 }

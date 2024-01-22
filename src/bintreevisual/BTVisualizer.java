@@ -27,9 +27,4 @@ public class BTVisualizer <T>
     {
         new BTFrame<T>(root, valueGetter, leftGetter, rightGetter);
     }
-
-    // public <T> void visualize(T root, Supplier<T> valueGetter)
-    // {
-    //     new BTFrame(root, valueGetter);
-    // }
 }
