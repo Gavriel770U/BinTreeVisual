@@ -25,6 +25,7 @@ public class BTVisualizer <T>
 
     public void visualize(T root, Function<T, ?> valueGetter, Function<T, ?> leftGetter, Function<T, ?>  rightGetter)
     {
-        new BTFrame<T>(root, valueGetter, leftGetter, rightGetter);
+        Runnable visRunnable = new BTRunnable<T>(root, valueGetter, leftGetter, rightGetter);
+        new Thread(visRunnable).start();
     }
 }

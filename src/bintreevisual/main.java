@@ -51,6 +51,9 @@ class Main
         tr1.setRight(tr2);
         tr2.setRight(tr3);
         tr3.setRight(tr4);
+        
+        // testing if it shows two frames
+        vis.visualize(root, BinNode::getValue, BinNode::getLeft, BinNode::getRight);
 
         t2.setRight(new BinNode<Integer>(88));
 
