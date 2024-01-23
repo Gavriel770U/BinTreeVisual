@@ -1,4 +1,4 @@
-package examples;
+package examples.example_two;
 
 import bintreevisual.BTVisualizer;
 

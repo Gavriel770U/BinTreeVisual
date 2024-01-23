@@ -1,4 +1,4 @@
-package examples;
+package examples.example_two;
 
 public class BinTree <T>
 {
