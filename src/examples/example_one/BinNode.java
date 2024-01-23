@@ -1,4 +1,4 @@
-package examples;
+package examples.example_one;
 
 public class BinNode <T>
 {
