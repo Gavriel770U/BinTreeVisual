@@ -4,8 +4,8 @@ class Main
 {
     public static void main(String[] args)
     {
-        System.out.println("Welcome to Bin Tree Visualisation!");
-        
+        System.out.println("Welcome to Bin Tree Visualization!");
+
         BTVisualizer<BinNode> vis = BTVisualizer.getInstance();
 
         BinNode<Integer> root = new BinNode<>(1);
