@@ -1,4 +1,4 @@
-package bintreevisual;
+package examples;
 
 public class BinNode <T>
 {
