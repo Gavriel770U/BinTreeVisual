@@ -23,9 +23,27 @@ public class BTVisualizer <T>
         return instance;
     }
 
-    public void visualize(T root, Function<T, ?> valueGetter, Function<T, ?> leftGetter, Function<T, ?>  rightGetter)
+    private <U> BTNode<U> copyTree(T root, Function<T, ?> valueGetter, Function<T, ?> leftGetter, Function<T, ?> rightGetter)
     {
-        Runnable visRunnable = new BTRunnable<T>(root, valueGetter, leftGetter, rightGetter);
-        new Thread(visRunnable).start();
+        if (null == root)
+        {
+            return null;
+        }
+
+        BTNode<U> copy = new BTNode<U>((U)valueGetter.apply(root));
+        
+        copy.setLeft(this.copyTree((T)leftGetter.apply(root), valueGetter, leftGetter, rightGetter));
+
+        copy.setRight(this.copyTree((T)rightGetter.apply(root), valueGetter, leftGetter, rightGetter));
+
+        return copy;
+    }
+
+    public void visualize(T root, Function<T, ?> valueGetter, Function<T, ?> leftGetter, Function<T, ?> rightGetter) 
+    {
+        BTNode copyRoot = copyTree(root, valueGetter, leftGetter, rightGetter);
+        Runnable visRunnable = new BTRunnable<BTNode>(copyRoot, BTNode::getValue, BTNode::getLeft, BTNode::getRight);
+        Thread thread = new Thread(visRunnable);
+        thread.start();
     }
 }
