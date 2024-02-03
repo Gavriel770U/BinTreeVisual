@@ -1,3 +1,5 @@
+#!/bin/bash
+
 @echo off
 
 set SOURCE_DIR=src
