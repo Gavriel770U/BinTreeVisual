@@ -1,14 +1,12 @@
 #!/bin/bash
 
-@echo off
+SOURCE_DIR=src
+BUILD_DIR=build
 
-set SOURCE_DIR=src
-set BUILD_DIR=build
+cd "$SOURCE_DIR"
+javac -d ../"$BUILD_DIR" ./bintreevisual/*.java
 
-cd %SOURCE_DIR%
-javac -d ../%BUILD_DIR% ./bintreevisual/*.java
-
-cd ../%BUILD_DIR%
+cd ../"$BUILD_DIR"
 jar cfm BinTreeVisual.jar ./MANIFEST.MF -C bintreevisual/ .
 
-echo Build completed successfully.
+echo "Build completed successfully."
